@@ -1,80 +1,64 @@
-"use client";
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
+import dbConnect from '@/lib/dbConnect';
+import linksData from '@/models/linkmodels';
 import { PayComponent } from '@/components/PayComponent';
+import Link from 'next/link';
+import { Separator } from "@/components/ui/separator"
 
 
-export default function Page({ params }: { params: { upi_link: string } }) {
-  const searchParams = useSearchParams();
+// Ignore ts error
 
-  // Decoding the upi_link from params
-  const upi_link = decodeURIComponent(params.upi_link);
-  const { props: { link_model_var } = {} } = processData(params, searchParams);
+export default async function Page({ params, searchParams }: { params: any, searchParams: any }) {
+  await dbConnect();
 
-  return (
-    <main className="main">
-          <PayComponent pn={link_model_var?.name} 
-                      amount_list={link_model_var?.amount_list} 
-                      upiid={link_model_var?.upi_id} 
-                      btnText={link_model_var?.btnText} 
-                      minAmount={link_model_var?.minAmount}
-                      transactionNote={link_model_var?.transactionNote}/>
-          </main>
-  );
-}
+  const upi_link = decodeURIComponent(params.upi_link as string);
+  let link_model_var = null;
 
-
-function processData(params: { upi_link: any; },searchParams: ReadonlyURLSearchParams) {
   try {
-    // const { link } = context.params;
-    const upi_link = decodeURIComponent(params.upi_link); 
-    if(upi_link.includes("@")){
-        var link_model_var_local = {
-          name: (searchParams.get('pn')? searchParams.get('pn') : searchParams.get('upi_link')),
-          amount_list: (searchParams.get('amount_list')? searchParams.get('amount_list') : ""),
-          upi_id: upi_link,
-          minAmount: (searchParams.get('mam')? searchParams.get('mam') : ""),
-          btnText: (searchParams.get('btnText')? searchParams.get('btnText') : "Pay Now"),
-          upi_link: (searchParams.get('upi_link')? searchParams.get('upi_link') : ""),
-          transactionNote: (searchParams.get('tn')? searchParams.get('tn') : "PayViaUPI"),
-        }  
-      return {
-          props: {
-            link_model_var: link_model_var_local,
-          },
-        };
-
-      }
-    // await connectDB();
-    // const link_model_var = await link_model.findOneAndUpdate(
-    //         { upi_link },
-    //         { $inc: { clicks: 1 } },
-    //         { new: true }
-    //       );
-    // await disconnectDB();
-    // if (link_model_var) {
-
-    //   // Convert the Mongoose document to a plain JavaScript object and exclude the _id field
-    //   const linkDataObject = link_model_var.toObject({ transform: (doc, ret) => {
-    //     delete ret._id;
-    //     return ret;
-    //   }});
-    //   return {
-    //     props: {
-    //       link_model_var: linkDataObject,
-    //     },
-    //   };
-    // } 
-    // else {
-      return {
-        notFound: true,
+    if (upi_link.includes('@')) {
+      link_model_var = {
+        name: searchParams.pn || searchParams.upi_link || '',
+        amount_list: searchParams.amount_list || '',
+        upi_id: upi_link,
+        minAmount: searchParams.mam || '',
+        btnText: searchParams.btnText || 'Pay Now',
+        upi_link: searchParams.upi_link || '',
+        transactionNote: searchParams.tn || 'PayViaUPI',
       };
-    // }
+    } else {
+      link_model_var = await linksData.findOneAndUpdate(
+        { upi_link },
+        { $inc: { clicks: 1 } },
+        { new: true }
+      ).lean();
+    }
+
+    if (!link_model_var) {
+      return (<main className="flex items-center justify-center h-screen text-center">
+        <div>
+          <h1 className="text-3xl font-bold mb-4">404 - Page Not Found</h1>
+          <Link href="/" className="text-blue-500 hover:underline">Go back home</Link> <Separator orientation="vertical"/><Link href="/" className="text-blue-500 hover:underline">Create Your UPI Link</Link>
+          
+        </div>
+      </main>
+      );
+    }
+
+    return (
+      <main className="main">
+        <PayComponent 
+          pn={link_model_var.name} 
+          amount_list={link_model_var.amount_list} 
+          upiid={link_model_var.upi_id} 
+          btnText={link_model_var.btn_txt} 
+          minAmount={link_model_var.minAmount}
+          transactionNote={link_model_var.transactionNote}
+        />
+      </main>
+    );
   } catch (error) {
-    console.error(error);
+    console.error('Error processing data:', error);
     return {
-      props: {
-        link_model_var: null,
-      },
+      notFound: true,
     };
   }
 }

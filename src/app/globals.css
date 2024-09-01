@@ -67,3 +67,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* =====================*/
+
+input {
+  border: 1px solid #eee;
+  width: 224px;
+  height: 35px;
+  border-radius: 10px;
+  padding: 1px 5px 1px 10px;
+  /* fontsize: 16px; */
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+label {
+  color: #6b6b6b;
+}
+
+
+
+button:hover {
+  background-color: #353434;
+  color: #c5c5c5;
+}
+
+.listItem:hover {
+  background-color: #eee;
+  color: #4f4f4f;
+}
+
+.logo:hover {
+  word-spacing: -0.2rem;
+}
+
+
+

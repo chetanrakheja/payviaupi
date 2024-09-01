@@ -57,6 +57,9 @@ export function Navbar() {
               <DropdownMenuItem asChild>
                     <Link href="/settings">Settings</Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
@@ -68,7 +71,7 @@ export function Navbar() {
             {/* {session.data?.user && <Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signOut()}>Logout</Button>} */}
 
             
-            {!session.data?.user &&<Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signIn()}>Signin</Button>}
+            {!session.data?.user &&<Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signIn()}>Log in</Button>}
         </div>
     </div>
 }
