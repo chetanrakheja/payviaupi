@@ -105,7 +105,7 @@ useEffect(() => {
 
               </div>
               <div className="flex flex-col p-4">
-                <Image className="p-0 m-auto" src={img} alt={upiid} width={200} height={200}/>
+                <Image className="p-0 m-auto" src={img} alt={upiid ?? ''} width={200} height={200}/>
                 
                 <div className="text-sm color-6B6B6B textAlign-center">
                   {upiid}
