@@ -129,7 +129,7 @@ export default function Page() {
   return (
     <article className="container-fluid">
     <main className="main p-16 flex-1 flex flex-col justify-center items-center">
-      <h1 className="text-4xl ">Create a Pay Via UPI Button/Link!</h1>
+      <h1 className="text-4xl ">Create a Pay Via UPI Link!</h1>
 
       <div className="flex row row-cols-1 row-cols-lg-2 align-items-stretch g-4 py-5" style={{ gap: "25px" }}>
         <div className="col-md-12 col-lg-6 form">
@@ -235,6 +235,7 @@ export default function Page() {
           />
         </div>
       </div>
+      <div><b>Note:</b> Once the link is generated, it cannot be changed at this time. We are working on this feature, and it will be available soon.</div>
     </main>
   </article>
   );

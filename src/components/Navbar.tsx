@@ -46,7 +46,7 @@ export function Navbar() {
           <DropdownMenuTrigger asChild>
 
             <Avatar>
-              <AvatarImage src={session.data.user.image} />
+              <AvatarImage src={session.data.user.image ?? ''} />
               <AvatarFallback>{getInitials(session.data.user.name)}</AvatarFallback>
               </Avatar>
             
