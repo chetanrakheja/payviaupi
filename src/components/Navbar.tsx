@@ -37,41 +37,45 @@ export function Navbar() {
         <div className="text-lg font-bold flex flex-col justify-center">
             <a href="/">PayViaUPI</a>
         </div>
-        <ModeToggle />
-        <div>
+        <div className="flex items-center space-x-4">
+          <div>
 
-            {session.data?.user && 
-            <div>
-            <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          {session.data?.user && 
+          <div>
+          <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+
+            <Avatar>
+              <AvatarImage src={session.data.user.image} />
+              <AvatarFallback>{getInitials(session.data.user.name)}</AvatarFallback>
+              </Avatar>
             
-               <Avatar>
-                <AvatarImage src={session.data.user.image} />
-                <AvatarFallback>{getInitials(session.data.user.name)}</AvatarFallback>
-                </Avatar>
-              
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+                  <Link href="/settings">Settings</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                    <Link href="/settings">Settings</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Dashboard</Link>
-                </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
+                  <Link href="/dashboard">Dashboard</Link>
+              </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
           </DropdownMenu>
-            </div>
-                
-            }
+          </div>
+              
+          }
 
-            {/* {session.data?.user && <Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signOut()}>Logout</Button>} */}
+          {/* {session.data?.user && <Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signOut()}>Logout</Button>} */}
 
-            
-            {!session.data?.user &&<Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signIn()}>Log in</Button>}
+
+          {!session.data?.user &&<Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signIn()}>Log in</Button>}
+
+          </div>
+          <ModeToggle />
         </div>
+        
     </div>
 }
