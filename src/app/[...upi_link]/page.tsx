@@ -2,7 +2,6 @@ import dbConnect from '@/lib/dbConnect';
 import linksData from '@/models/linkmodels';
 import { PayComponent } from '@/components/PayComponent';
 import Link from 'next/link';
-import { Separator } from "@/components/ui/separator"
 
 
 // Ignore ts error
@@ -36,7 +35,7 @@ export default async function Page({ params, searchParams }: { params: any, sear
       return (<main className="flex items-center justify-center h-screen text-center">
         <div>
           <h1 className="text-3xl font-bold mb-4">404 - Page Not Found</h1>
-          <Link href="/" className="text-blue-500 hover:underline">Go back home</Link> <Separator orientation="vertical"/><Link href="/" className="text-blue-500 hover:underline">Create Your UPI Link</Link>
+          <Link href="/" className="text-blue-500 hover:underline">Go back home</Link> | <Link href="/createlink" className="text-blue-500 hover:underline">Create Your UPI Link</Link>
           
         </div>
       </main>

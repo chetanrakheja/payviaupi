@@ -3,7 +3,7 @@ import { useState,useCallback,useEffect } from "react";
 import { PayComponent } from "@/components/PayComponent";    
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { redirect } from 'next/navigation'
+
 
 
 export default function Page() {
@@ -197,7 +197,7 @@ export default function Page() {
               />
             </div>
             <div className="flex flex-col btnText">
-              <label>Button Text*</label>
+              <label>Button Text</label>
               <input
                 value={btnText}
                 onChange={(e) => setBtnText(e.target.value)}
