@@ -131,8 +131,8 @@ export default function Page() {
     <main className="main p-16 flex-1 flex flex-col justify-center items-center">
       <h1 className="text-4xl ">Create a Pay Via UPI Link!</h1>
 
-      <div className="flex row row-cols-1 row-cols-lg-2 align-items-stretch g-4 py-5" style={{ gap: "25px" }}>
-        <div className="col-md-12 col-lg-6 form">
+      <div className="flex flex-col lg:flex-row items-stretch gap-4 py-5" style={{ gap: "25px" }}>
+        <div className="w-full lg:w-1/2 form">
           <form>
             <div className="flex flex-col name">
               <label>Name*</label>
@@ -224,7 +224,7 @@ export default function Page() {
               <Button className="my-4 w-56" onClick ={createLink}>Create Link</Button>
           
         </div>
-        <div className="col-md-12 col-md-6">
+        <div className="w-full lg:w-1/2">
           <PayComponent
             pn={name}
             amount_list={amountListStr}
