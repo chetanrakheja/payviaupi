@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         await dbConnect()
         // get links where userEmail and userId matches
         
-        let linkvar = await linksData.find({ userEmail: session?.user?.email, userId: session?.user?.id }).lean();
+        let linkvar = await linksData.find({ userEmail: session?.user?.email }).lean();
 
           if (linkvar) {
             return NextResponse.json(linkvar, { status: 200 })
