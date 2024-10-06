@@ -39,8 +39,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center space-x-4">
           <div>
-
-          {session.data?.user && 
+{session.data?.user && 
           <div>
           <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -54,11 +53,11 @@ export function Navbar() {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            {/* <DropdownMenuItem asChild>
                   <Link href="/settings">Settings</Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem asChild>
-                  <Link href="/dashboard">Dashboard</Link>
+                  <Link href="/managelinks">Manage Links</Link>
               </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
@@ -73,6 +72,7 @@ export function Navbar() {
 
           {!session.data?.user &&<Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => signIn()}>Log in</Button>}
 
+          
           </div>
           <ModeToggle />
         </div>

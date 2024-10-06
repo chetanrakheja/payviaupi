@@ -10,13 +10,14 @@ export default async function Page({ params, searchParams }: { params: any, sear
   await dbConnect();
 
   const upi_link = decodeURIComponent(params.upi_link as string);
+  let amount_list = decodeURIComponent(params.amount_list as string);
   let link_model_var = null;
 
   try {
     if (upi_link.includes('@')) {
       link_model_var = {
         name: searchParams.pn || searchParams.upi_link || '',
-        amount_list: searchParams.amount_list || '',
+        amount_list: amount_list || searchParams.amount_list || '',
         upi_id: upi_link,
         minAmount: searchParams.mam || '',
         btnText: searchParams.btnText || 'Pay Now',
@@ -45,12 +46,12 @@ export default async function Page({ params, searchParams }: { params: any, sear
     return (
       <main className="main">
         <PayComponent 
-          pn={link_model_var.name} 
-          amount_list={link_model_var.amount_list} 
+          pn={searchParams.pn || link_model_var.name} 
+          amount_list={amount_list || searchParams.amount_list || link_model_var.amount_list} 
           upiid={link_model_var.upi_id} 
-          btnText={link_model_var.btn_txt} 
-          minAmount={link_model_var.minAmount}
-          transactionNote={link_model_var.transactionNote}
+          btnText={searchParams.btnText ||link_model_var.btn_txt} 
+          minAmount={searchParams.mam || link_model_var.minAmount}
+          transactionNote={searchParams.tn || link_model_var.transactionNote || 'PayViaUPI'}
         />
       </main>
     );

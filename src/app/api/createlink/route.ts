@@ -13,8 +13,8 @@ export async function POST(request: Request) {
     // console.log(body);
     // let upi_id = body.upi_id;
     
-  let { name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link,username } = JSON.parse(await request.text());
-//   console.log(name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link);
+  let { name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link,userEmail } = JSON.parse(await request.text());
+//   console.log(name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link,userEmail);
 //   console.log("name = ", name);
 //     console.log("amount_list = ", amount_list);
 //     console.log("upi_id = ", upi_id);
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
 //     console.log("minAmount = ", minAmount);
 //     console.log("transactionNote = ", transactionNote);
 //     console.log("upi_link = ", upi_link);
+// console.log("userEmail = ", userEmail);
     
   // await connectDB()
 
@@ -35,7 +36,7 @@ export async function POST(request: Request) {
         return NextResponse.json(linkvar, { status: 200 })
         
       } else {
-        linkvar = new linksData({name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link,
+        linkvar = new linksData({name,amount_list,upi_id,btn_txt,minAmount,transactionNote,upi_link,userEmail,
         created_date: new Date(),
           upi_qr_data :`upi://pay?cu=INR` +
                         `&pa=${upi_id}` +

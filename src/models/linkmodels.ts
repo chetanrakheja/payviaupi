@@ -12,6 +12,7 @@ export interface LinkData extends Document {
   upi_link: string;
   clicks: number;
   created_date: Date;
+  userEmail: string;
   upi_qr_data?: string;  // This is optional since it's not required
 }
 
@@ -28,6 +29,7 @@ const LinkSchema: Schema<LinkData> = new mongoose.Schema({
   clicks: { type: Number, required: true, default: 0 },
   created_date: { type: Date, default: Date.now },
   upi_qr_data: { type: String, required: false }, // Optional field
+  userEmail:{type:String,required:false}
 });
 
 // // let linksData

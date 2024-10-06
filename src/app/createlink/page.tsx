@@ -3,7 +3,7 @@ import { useState,useCallback,useEffect } from "react";
 import { PayComponent } from "@/components/PayComponent";    
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-
+import { useSession } from "next-auth/react";
 
 
 export default function Page() {
@@ -17,6 +17,7 @@ export default function Page() {
   const [UPILink, setUPILink] = useState('');
   const [linkStatus, setLinkStatus] = useState('');
   const router = useRouter();
+  const session = useSession();
 
   const debounce = (func: Function, delay: number) => {
     let timeout:any;
@@ -103,7 +104,8 @@ export default function Page() {
         "upi_link": UPILink.toLowerCase(),
         "amount_list": amountListStr,
         "minAmount": minAmount,
-        "transactionNote": transactionNote
+        "transactionNote": transactionNote,
+        "userEmail": session.data?.user?.email
       })
     })
     .then(response => response.json())
@@ -204,6 +206,7 @@ export default function Page() {
                 placeholder="Pay"
               />
             </div>
+            
             <div className="flex flex-col upiLink">
               <label>UPI Link</label>
               <input
@@ -235,7 +238,7 @@ export default function Page() {
           />
         </div>
       </div>
-      <div><b>Note:</b> Once the link is generated, it cannot be changed at this time. We are working on this feature, and it will be available soon.</div>
+      <div><b>Note:</b> Please log in before creating link to modify the link in the future.</div>
     </main>
   </article>
   );
