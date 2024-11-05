@@ -3,7 +3,7 @@ import React from 'react';
 export default function RobotsTxt() {
     const content = `
     User-agent: *
-    Disallow: /
+    Disallow: 
     `;
     
     return (
